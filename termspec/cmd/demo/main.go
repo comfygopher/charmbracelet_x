@@ -73,6 +73,7 @@ func main() {
 	envVars := []string{
 		"TERM",
 		"TERM_PROGRAM",
+		"TERMINAL_EMULATOR",
 		"KITTY_WINDOW_ID",
 		"KITTY_PID",
 		"ITERM_SESSION_ID",

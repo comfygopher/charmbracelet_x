@@ -188,6 +188,51 @@ func TestTmuxSpec(t *testing.T) {
 	}
 }
 
+func TestJetBrainsSpec(t *testing.T) {
+	spec := &JetBrainsSpec{}
+
+	// Test name
+	if spec.Name() != "jetbrains" {
+		t.Errorf("Expected name 'jetbrains', got '%s'", spec.Name())
+	}
+
+	// Test detection with environment variables
+	originalEnv := os.Getenv("TERMINAL_EMULATOR")
+
+	// Clean environment
+	os.Unsetenv("TERMINAL_EMULATOR")
+
+	// Should not detect without environment variables
+	if spec.Detect() {
+		t.Error("JetBrainsSpec should not detect without environment variables")
+	}
+
+	// Test with TERMINAL_EMULATOR
+	os.Setenv("TERMINAL_EMULATOR", "JetBrains-JediTerm")
+	if !spec.Detect() {
+		t.Error("JetBrainsSpec should detect with TERMINAL_EMULATOR=JetBrains-JediTerm")
+	}
+
+	// Test with wrong value
+	os.Setenv("TERMINAL_EMULATOR", "SomeOtherTerminal")
+	if spec.Detect() {
+		t.Error("JetBrainsSpec should not detect with wrong TERMINAL_EMULATOR value")
+	}
+
+	// Restore original environment
+	if originalEnv != "" {
+		os.Setenv("TERMINAL_EMULATOR", originalEnv)
+	} else {
+		os.Unsetenv("TERMINAL_EMULATOR")
+	}
+
+	// Test basic functionality
+	width := spec.ColCount('a')
+	if width < 0 {
+		t.Errorf("ColCount('a') returned negative width: %d", width)
+	}
+}
+
 func TestGetRegistered(t *testing.T) {
 	specs := GetRegistered()
 	if len(specs) == 0 {

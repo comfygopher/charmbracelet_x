@@ -13,11 +13,12 @@ Package `termspec` provides terminal-specific specifications and detection for G
 ## Supported Terminals
 
 - **Kitty**: Advanced terminal with excellent Unicode support
-- **iTerm2**: Popular macOS terminal with good Unicode support  
+- **iTerm2**: Popular macOS terminal with good Unicode support
 - **Alacritty**: GPU-accelerated terminal using wcwidth calculation
 - **WezTerm**: Modern terminal with full grapheme clustering support
 - **XTerm**: Traditional terminal using wcwidth calculation
 - **Tmux**: Terminal multiplexer using wcwidth calculation
+- **JetBrains**: JetBrains IDE terminal using wcwidth calculation
 - **Default**: Fallback specification using grapheme clustering
 
 ## Installation
@@ -89,6 +90,7 @@ The package detects terminals using environment variables:
 | WezTerm | `TERM_PROGRAM=WezTerm`, `TERM=wezterm*`, `WEZTERM_EXECUTABLE` |
 | XTerm | `TERM=xterm*` (when no other terminal detected), `XTERM_VERSION` |
 | Tmux | `TMUX`, `TMUX_PANE`, `TERM=tmux*` |
+| JetBrains | `TERMINAL_EMULATOR=JetBrains-JediTerm` |
 
 ## Width Calculation Methods
 
@@ -98,7 +100,7 @@ Different terminals use different methods for calculating character widths:
   - Provides better Unicode support
   - Handles complex characters and emoji properly
   
-- **wcwidth**: Used by Alacritty, XTerm, and Tmux
+- **wcwidth**: Used by Alacritty, XTerm, Tmux, and JetBrains
   - Traditional width calculation
   - Faster but less accurate for complex Unicode
 

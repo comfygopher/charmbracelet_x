@@ -111,6 +111,7 @@ func Example_terminalDifferences() {
 		&termspec.AlacrittySpec{},
 		&termspec.XTermSpec{},
 		&termspec.WezTermSpec{},
+		&termspec.JetBrainsSpec{},
 	}
 
 	// Test character that might have different widths
