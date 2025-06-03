@@ -24,6 +24,7 @@ use (
 	./sshkey
 	./term
 	./termios
+	./termspec
 	./vt
 	./wcwidth
 	./windows
